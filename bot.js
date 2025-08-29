@@ -27,7 +27,10 @@ bot.command('add', (ctx) => {
     ctx.reply(`Подарок ${giftTitle} был успешно добавлен`)
 })
 bot.command('delete', (ctx) => {
-    ctx.reply('Удалить')
+    const giftIndex = Number(ctx.message.text.split(' ')[1])
+    const [deletedGift] = wishlist.splice(giftIndex -1, 1)
+    fs.writeFileSync('wishlist.json', JSON.stringify(wishlist, null, 2), 'utf8')
+    ctx.reply(`Подарок ${deletedGift.title} успешно удален`)
 })
 bot.command('buy', (ctx) => {
     ctx.reply('Купить')
