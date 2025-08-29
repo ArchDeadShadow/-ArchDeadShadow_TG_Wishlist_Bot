@@ -1,14 +1,14 @@
 [
   {
-    'title': "MacBook Pro",
-    'boughtBy': null
+    "title": "MacBook Pro",
+    "boughtBy": null
   },
   {
-    'title': "iPhone 16 Pro Max",
-    'boughtBy': null
+    "title": "iPhone 16 Pro Max",
+    "boughtBy": null
   },
   {
-    'title': 'PS5',
-    'boughtBy': null
+    "title": "PS5",
+    "boughtBy": null
   }
 ]
