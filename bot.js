@@ -33,7 +33,10 @@ bot.command('delete', (ctx) => {
     ctx.reply(`Подарок ${deletedGift.title} успешно удален`)
 })
 bot.command('buy', (ctx) => {
-    ctx.reply('Купить')
+    const giftIndex = Number(ctx.message.text.split(' ')[1])
+    wishlist[giftIndex - 1].boughtBy = ctx.from.username
+    fs.writeFileSync('wishlist.json', JSON.stringify(wishlist, null, 2), 'utf8')
+    ctx.reply(`Подарок ${wishlist[giftIndex - 1].title} будет куплен ${ctx.from.username}`)
 })
 bot.launch()
 
