@@ -32,11 +32,12 @@ This is a Telegram bot designed for managing a shopping wishlist. Users can add 
    Create a `.env` file in the root directory and add your Telegram bot token:
    ```env
    BOT_TOKEN=your-telegram-bot-token
+   ADMIN_ID=your-admin_id
    ```
 
 4. **Run the Bot**:
    ```bash
-   node index.js
+   node bot.js
    ```
 
 ## Usage
