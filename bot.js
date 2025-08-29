@@ -20,6 +20,10 @@ bot.command('wishlist', (ctx) => {
     ctx.reply(`Список подарков:\n${gifts.join('\n')}`)
 })
 bot.command('add', (ctx) => {
+    if (ctx.from.id !== ADMIN_ID) {
+        ctx.reply('Вы не можете добавлять подарок')
+        return
+    }
     const giftTitle = ctx.message.text.split(' ').slice(1).join(' ')
     const gift = {title: giftTitle, boughtBy: null}
     wishlist.push(gift)
@@ -27,6 +31,10 @@ bot.command('add', (ctx) => {
     ctx.reply(`Подарок ${giftTitle} был успешно добавлен`)
 })
 bot.command('delete', (ctx) => {
+    if (ctx.from.id !== ADMIN_ID) {
+        ctx.reply('Вы не можете удалять подарок')
+        return
+    }
     const giftIndex = Number(ctx.message.text.split(' ')[1])
     const [deletedGift] = wishlist.splice(giftIndex -1, 1)
     fs.writeFileSync('wishlist.json', JSON.stringify(wishlist, null, 2), 'utf8')
