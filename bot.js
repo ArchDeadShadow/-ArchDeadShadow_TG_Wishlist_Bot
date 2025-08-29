@@ -7,10 +7,19 @@ const BOT_TOKEN = process.env.BOT_TOKEN
 const ADMIN_ID = Number(process.env.ADMIN_ID)
 
 const bot = new Telegraf(process.env.BOT_TOKEN)
-bot.start((ctx) => ctx.reply('Welcome'))
-bot.help((ctx) => ctx.reply('Send me a sticker'))
-bot.on(message('sticker'), (ctx) => ctx.reply('👍'))
-bot.hears('hi', (ctx) => ctx.reply('Hey there'))
+bot.start((ctx) => ctx.reply('Этот список желаний содержит:'))
+bot.command('wishlist', (ctx) => {
+    ctx.reply('Тут весь список желаний')
+})
+bot.command('add', (ctx) => {
+    ctx.reply('Добавить желаемое')
+})
+bot.command('delete', (ctx) => {
+    ctx.reply('Удалить')
+})
+bot.command('buy', (ctx) => {
+    ctx.reply('Купить')
+})
 bot.launch()
 
 // Enable graceful stop
