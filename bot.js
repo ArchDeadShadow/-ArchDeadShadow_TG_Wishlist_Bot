@@ -10,7 +10,7 @@ const ADMIN_ID = Number(process.env.ADMIN_ID)
 const wishlist = JSON.parse(fs.readFileSync('wishlist.json', 'utf8'))
 
 const bot = new Telegraf(process.env.BOT_TOKEN)
-bot.start((ctx) => ctx.reply('Этот список желаний содержит:'))
+bot.start((ctx) => ctx.reply('Вас приветствует ваш список подарков'))
 bot.command('wishlist', (ctx) => {
     const gifts = wishlist.map((gift, index) => {
         const bought = gift.boughtBy ? `(куплено${gift.boughtBy})` : `(не куплено)`
@@ -20,7 +20,11 @@ bot.command('wishlist', (ctx) => {
     ctx.reply(`Список подарков:\n${gifts.join('\n')}`)
 })
 bot.command('add', (ctx) => {
-    ctx.reply('Добавить желаемое')
+    const giftTitle = ctx.message.text.split(' ').slice(1).join(' ')
+    const gift = {title: giftTitle, boughtBy: null}
+    wishlist.push(gift)
+    fs.writeFileSync('wishlist.json', JSON.stringify(wishlist, null, 2), 'utf8')
+    ctx.reply(`Подарок ${giftTitle} был успешно добавлен`)
 })
 bot.command('delete', (ctx) => {
     ctx.reply('Удалить')
